@@ -15,6 +15,9 @@ import { StoreProvider, useStore } from './context/StoreContext';
 import type { Category } from './types';
 import './App.scss';
 
+const asset = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
 const categoryTitle: Record<Category, string> = {
   phones: 'Phones',
   tablets: 'Tablets',
@@ -41,21 +44,21 @@ const slides = [
   {
     title: 'iPhone 14 Pro',
     subtitle: 'Pro. Beyond.',
-    image: '/img/Banner slider.png',
+    image: asset('/img/Banner slider.png'),
     link: '/phones',
     type: 'reference',
   },
   {
     title: 'iPad Air',
     subtitle: 'Light. Bright. Full of might.',
-    image: '/img/banner-tablets.png',
+    image: asset('/img/banner-tablets.png'),
     link: '/tablets',
     type: 'tablet',
   },
   {
     title: 'Apple Watch',
     subtitle: 'A healthy leap ahead.',
-    image: '/img/banner-accessories.png',
+    image: asset('/img/banner-accessories.png'),
     link: '/accessories',
     type: 'accessories',
   },
@@ -128,9 +131,9 @@ function Home() {
     .slice(0, 4);
   const newest = [...products].sort((a, b) => b.year - a.year).slice(0, 4);
   const categoryImages = {
-    phones: '/img/category-phones.webp',
-    tablets: '/img/category-tablets.webp',
-    accessories: '/img/category-accessories.webp',
+    phones: asset('/img/category-phones.webp'),
+    tablets: asset('/img/category-tablets.webp'),
+    accessories: asset('/img/category-accessories.webp'),
   };
 
   return (
@@ -490,7 +493,7 @@ function NotFound() {
 
 export const App = () => (
   <StoreProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

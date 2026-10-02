@@ -41,7 +41,7 @@ export const products: Product[] = (catalog as ApiProduct[]).map(item => ({
   price: item.price,
   fullPrice: item.fullPrice,
   year: item.year,
-  image: `/${item.image}`,
+  image: `${import.meta.env.BASE_URL}${item.image}`,
   colors: [colorValues[item.color] || '#75767f'],
   capacities: [item.capacity],
   description: `${item.name} brings a bright display, dependable performance and a refined design for every day.`,
